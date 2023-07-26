@@ -40,3 +40,12 @@ resource "kubernetes_service" "nginx" {
     type = "LoadBalancer"
   }
 }
+
+resource "aws_eks_cluster" "unrestricted_access2" {
+    name = "unrestricted_access2"
+    role_arn = var.cluster_arn
+    vpc_config {
+        endpoint_public_access = true
+        public_access_cidrs = ["0.0.0.0/0"]
+    }
+}
